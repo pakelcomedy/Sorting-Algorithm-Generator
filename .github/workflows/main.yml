@@ -22,6 +22,9 @@ jobs:
       run: |
         pip install -r requirements.txt  # Install dependencies jika ada
 
+    - name: Install ImageMagick
+      run: sudo apt-get install -y imagemagick
+
     - name: Run Python script
       run: |
         python generate_and_solve.py  # Jalankan skrip Python
