@@ -25,3 +25,13 @@ jobs:
     - name: Run Python script
       run: |
         python generate_and_solve.py  # Jalankan skrip Python
+
+    - name: Commit changes
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@example.com"
+        git add .
+        git commit -m "Update generated files and animation"
+        git push origin main
