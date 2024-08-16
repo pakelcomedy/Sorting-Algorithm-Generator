@@ -1,6 +1,6 @@
 import random
 
-def generate_puzzle(length=500, min_value=1, max_value=100):
+def generate_puzzle(length=25, min_value=1, max_value=100):
     """Generate a random list of integers."""
     return [random.randint(min_value, max_value) for _ in range(length)]
 
