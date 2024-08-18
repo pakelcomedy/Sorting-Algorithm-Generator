@@ -25,16 +25,22 @@ jobs:
     - name: Install ImageMagick
       run: sudo apt-get update && sudo apt-get install -y imagemagick
 
+    - name: Create Preview directory
+      run: mkdir -p Preview
+
+    - name: List directories to check
+      run: ls -R  # This will list all directories and files to confirm 'Preview' was created
+
     - name: Run Python script
-      run: |
-        python python/generate_and_solve.py  # Run the Python script
+      working-directory: Python  # Ensure this is the correct directory (case-sensitive)
+      run: python generate_and_solve.py  # Run the Python script
 
     - name: Commit changes
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git config --global user.name "Your Name"
-        git config --global user.email "your-email@example.com"
+        git config --global user.name "PakelComedy"
+        git config --global user.email "danieldna1411@gmail.com"
         git add .
-        git commit -m "Update generated files and animation" || echo "No changes to commit"
+        git diff --cached --quiet || git commit -m "Update generated files and animation"
         git push origin main
