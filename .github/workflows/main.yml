@@ -1,7 +1,6 @@
 name: Run Python Script
 
 on:
-  # Trigger the workflow manually
   workflow_dispatch:
 
 jobs:
@@ -30,6 +29,13 @@ jobs:
         echo "Current working directory: $(pwd)"
         mkdir -p Preview
         python Python/generate_and_solve.py
+
+    - name: Verify files
+      run: |
+        echo "Contents of Preview directory:"
+        ls -l Preview
+        echo "Contents of repository root:"
+        ls -l
 
     - name: Upload animation and README
       uses: actions/upload-artifact@v3
