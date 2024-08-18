@@ -44,7 +44,7 @@ if __name__ == "__main__":
             if "Sorting completed in" in line:
                 continue  # Remove the old line with duration
             f.write(line)
-        f.write(f"\n## Sorting Speed\n\n{duration_str}\n")
+        f.write(f"\n Sorting Speed\n\n{duration_str}\n")
 
     # Create sorting animation
     animate_sorting(steps)
