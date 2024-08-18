@@ -30,6 +30,14 @@ jobs:
         mkdir -p Preview
         python Python/generate_and_solve.py
 
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add README.md
+        git commit -m 'Update README.md with new content'
+        git push
+
     - name: Verify files
       run: |
         echo "Contents of Preview directory:"
