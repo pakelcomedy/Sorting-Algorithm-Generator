@@ -25,6 +25,13 @@ jobs:
     - name: Install ImageMagick
       run: sudo apt-get update && sudo apt-get install -y imagemagick
 
+    - name: List files in root and python directories
+      run: |
+        echo "Listing files in the root directory:"
+        ls -la
+        echo "Listing files in the python directory:"
+        ls -la python
+
     - name: Run Python script
       working-directory: python  # Set the working directory where the script is located
       run: |
@@ -37,5 +44,5 @@ jobs:
         git config --global user.name "PakelComedy"
         git config --global user.email "danieldna1411@gmail.com"
         git add .
-        git commit -m "Update generated files and animation" || echo "No changes to commit"
+        git diff --cached --quiet || git commit -m "Update generated files and animation"
         git push origin main
