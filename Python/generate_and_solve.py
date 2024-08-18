@@ -19,9 +19,13 @@ def update_readme(merge_sort_time):
         )
 
 if __name__ == "__main__":
+    # Print the current working directory
+    print("Current working directory:", os.getcwd())
+
     # Ensure the 'Preview' directory exists
     output_dir = "Preview"
     os.makedirs(output_dir, exist_ok=True)
+    print(f"Directory '{output_dir}' is ready.")
 
     # Generate a consistent dataset
     puzzle = generate_puzzle(length=100)  # Generate 100 elements
@@ -36,6 +40,7 @@ if __name__ == "__main__":
 
     # Create sorting animation for Merge Sort
     animation_path = os.path.join(output_dir, "merge_sort_animation.gif")
+    print(f"Saving animation to {animation_path}")
     animate_sorting(steps, output_file=animation_path)
 
     # Update README with sort time and animation
