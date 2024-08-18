@@ -3,32 +3,49 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from generate_puzzle import generate_puzzle
 from solve_puzzle import merge_sort
-from animate_sorting import animate_sorting
+
+def animate_sorting(steps, output_file="sorting_animation.gif", interval=50):
+    fig, ax = plt.subplots()
+    bar_container = ax.bar(range(len(steps[0])), steps[0])
+
+    def update(frame):
+        for rect, val in zip(bar_container, steps[frame]):
+            rect.set_height(val)
+        return bar_container
+
+    anim = animation.FuncAnimation(
+        fig, update, frames=len(steps), blit=True, repeat=False, interval=interval
+    )
+
+    anim.save(output_file, writer='pillow')
+    plt.show()
 
 if __name__ == "__main__":
-    # Mengukur waktu mulai
-    start_time = time.time()
-
-    # Menggenerate teka-teki
-    puzzle = generate_puzzle(length=100)  # Menghasilkan 25.000 elemen
+    # Generate puzzle
+    puzzle = generate_puzzle(length=100)  # Generate 100 elements
     print("Generated puzzle:", puzzle)
 
-    # Menyelesaikan teka-teki menggunakan Merge Sort
+    # Measure sorting time using time.perf_counter for high precision
     steps = []
+    start_time = time.perf_counter()
     merge_sort(puzzle, 0, len(puzzle) - 1, steps)
-    print("Sorting steps recorded.")
+    end_time = time.perf_counter()
 
-    # Membuat animasi penyortiran
+    sorting_time = end_time - start_time
+    duration_str = f"Sorting completed in {sorting_time:.10f} seconds"
+    print(duration_str)
+
+    # Update the README.md with the sorting duration
+    with open("README.md", "r") as f:
+        lines = f.readlines()
+
+    with open("README.md", "w") as f:
+        for line in lines:
+            if "Sorting completed in" in line:
+                continue  # Remove the old line with duration
+            f.write(line)
+        f.write(f"\n## Sorting Speed\n\n{duration_str}\n")
+
+    # Create sorting animation
     animate_sorting(steps)
-
-    # Mengukur waktu selesai
-    end_time = time.time()
-
-    # Menghitung total waktu yang dibutuhkan
-    elapsed_time = end_time - start_time
-    print(f"Total time taken: {elapsed_time:.2f} seconds")
-
-    # Menyimpan informasi waktu ke dalam README.md
-    with open("README.md", "a") as readme_file:
-        readme_file.write(f"\n## Performance\n")
-        readme_file.write(f"- Time taken to generate, sort, and animate 25,000 elements: {elapsed_time:.2f} seconds\n")
+    print("Sorting animation created as 'sorting_animation.gif'.")
