@@ -26,9 +26,8 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y imagemagick
 
     - name: Run Python script
-      working-directory: python  # Set working directory to the folder containing the script
       run: |
-        python generate_and_solve.py  # Run the Python script
+        python python/generate_and_solve.py  # Run the Python script from the root directory
 
     - name: Commit changes
       env:
