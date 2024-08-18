@@ -9,7 +9,7 @@ def update_readme(merge_sort_time):
     with open("README.md", "w") as f:
         f.write(
             '<h1 align="center"></h1>\n'
-            '<p align="center" style="font-weight: bold;">Merge Sort</p>\n'
+            '<p align="center" style="font-weight: Bold;">Merge Sort</p>\n'
             '<p align="center">\n'
             '  <img src="Preview/merge_sort_animation.gif" alt="Merge Sort Animation" width="600"/>\n'
             '  <p align="center" style="font-weight: normal;">Sorting completed in {:.10f} seconds</p>\n'
@@ -19,13 +19,16 @@ def update_readme(merge_sort_time):
         )
 
 if __name__ == "__main__":
-    # Print the current working directory
+    # Print working directory for debugging
     print("Current working directory:", os.getcwd())
 
     # Ensure the 'Preview' directory exists
     output_dir = "Preview"
-    os.makedirs(output_dir, exist_ok=True)
-    print(f"Directory '{output_dir}' is ready.")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+        print(f"Directory '{output_dir}' created.")
+    else:
+        print(f"Directory '{output_dir}' already exists.")
 
     # Generate a consistent dataset
     puzzle = generate_puzzle(length=100)  # Generate 100 elements
@@ -39,11 +42,9 @@ if __name__ == "__main__":
     print(f"Merge Sort completed in {merge_sort_time:.10f} seconds")
 
     # Create sorting animation for Merge Sort
-    animation_path = os.path.join(output_dir, "merge_sort_animation.gif")
-    print(f"Saving animation to {animation_path}")
-    animate_sorting(steps, output_file=animation_path)
+    animate_sorting(steps, output_file=os.path.join(output_dir, "merge_sort_animation.gif"))
 
     # Update README with sort time and animation
     update_readme(merge_sort_time)
 
-    print(f"Sorting animation created as '{animation_path}' and README.md updated.")
+    print("Sorting animation created as 'merge_sort_animation.gif' and README.md updated.")
