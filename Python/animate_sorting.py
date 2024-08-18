@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-def animate_sorting(steps, output_file="sorting_animation.gif", interval=50):
+def animate_sorting(steps, output_file="Preview/sorting_animation.gif", interval=50):
+    """Create and save an animation of the sorting process."""
     fig, ax = plt.subplots()
     bar_container = ax.bar(range(len(steps[0])), steps[0])
 
@@ -15,4 +16,4 @@ def animate_sorting(steps, output_file="sorting_animation.gif", interval=50):
     )
 
     anim.save(output_file, writer='pillow')
-    plt.show()
+    plt.close(fig)  # Close the figure to prevent it from displaying

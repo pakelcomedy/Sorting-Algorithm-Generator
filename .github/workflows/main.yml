@@ -2,8 +2,8 @@ name: Run Python Script Every Hour
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Menjalankan setiap jam pada menit ke-0
-  workflow_dispatch:  # Memungkinkan Anda untuk menjalankan workflow secara manual dari antarmuka GitHub
+    - cron: '0 * * * *'  # Runs every hour at minute 0
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
 
 jobs:
   run-script:
@@ -16,18 +16,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'  # Versi Python yang digunakan dalam workflow
+        python-version: '3.12'  # Python version used in the workflow
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt  # Install dependencies jika ada
+        pip install -r requirements.txt  # Install dependencies if any
 
     - name: Install ImageMagick
-      run: sudo apt-get install -y imagemagick
+      run: sudo apt-get update && sudo apt-get install -y imagemagick
 
     - name: Run Python script
       run: |
-        python generate_and_solve.py  # Jalankan skrip Python
+        python python/generate_and_solve.py  # Run the Python script
 
     - name: Commit changes
       env:
@@ -36,5 +36,5 @@ jobs:
         git config --global user.name "Your Name"
         git config --global user.email "your-email@example.com"
         git add .
-        git commit -m "Update generated files and animation"
+        git commit -m "Update generated files and animation" || echo "No changes to commit"
         git push origin main
