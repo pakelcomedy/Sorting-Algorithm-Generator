@@ -25,15 +25,15 @@ jobs:
     - name: Install ImageMagick
       run: sudo apt-get update && sudo apt-get install -y imagemagick
 
-    - name: List files in root and python directories
+    - name: List files in root and Python directories
       run: |
         echo "Listing files in the root directory:"
         ls -la
-        echo "Listing files in the python directory:"
-        ls -la python
+        echo "Listing files in the Python directory:"
+        ls -la Python
 
     - name: Run Python script
-      working-directory: python  # Set the correct working directory
+      working-directory: Python  # Use the correct directory name
       run: |
         python generate_and_solve.py  # Run the Python script
 
