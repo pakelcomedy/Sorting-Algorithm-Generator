@@ -25,12 +25,9 @@ jobs:
     - name: Install ImageMagick
       run: sudo apt-get update && sudo apt-get install -y imagemagick
 
-    - name: List files in root and Python directories
+    - name: Create Preview directory
       run: |
-        echo "Listing files in the root directory:"
-        ls -la
-        echo "Listing files in the Python directory:"
-        ls -la Python
+        mkdir -p Preview
 
     - name: Run Python script
       working-directory: Python  # Use the correct directory name
