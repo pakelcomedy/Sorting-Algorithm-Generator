@@ -1,10 +1,11 @@
+import os
 import time
 from generate_puzzle import generate_puzzle
 from solve_puzzle import merge_sort
 from animate_sorting import animate_sorting
 
 def update_readme(merge_sort_time):
-    """Update the README file with sort duration and animation link."""
+    """Update the README file with the sort duration and animation link."""
     with open("README.md", "w") as f:
         f.write(
             '<h1 align="center"></h1>\n'
@@ -14,10 +15,14 @@ def update_readme(merge_sort_time):
             '  <p align="center" style="font-weight: normal;">Sorting completed in {:.10f} seconds</p>\n'
             '</p>\n'
             '<h1 align="center"></h1>\n'
-            .format(merge_sort_time)  # Use format method correctly
+            .format(merge_sort_time)
         )
 
 if __name__ == "__main__":
+    # Ensure the 'Preview' directory exists
+    output_dir = "Preview"
+    os.makedirs(output_dir, exist_ok=True)
+
     # Generate a consistent dataset
     puzzle = generate_puzzle(length=100)  # Generate 100 elements
 
@@ -30,9 +35,9 @@ if __name__ == "__main__":
     print(f"Merge Sort completed in {merge_sort_time:.10f} seconds")
 
     # Create sorting animation for Merge Sort
-    animate_sorting(steps, output_file="Preview/merge_sort_animation.gif")
+    animate_sorting(steps, output_file=os.path.join(output_dir, "merge_sort_animation.gif"))
 
     # Update README with sort time and animation
     update_readme(merge_sort_time)
 
-    print("Sorting animation created as 'merge_sort_animation.gif'.")
+    print("Sorting animation created as 'merge_sort_animation.gif' and README.md updated.")
