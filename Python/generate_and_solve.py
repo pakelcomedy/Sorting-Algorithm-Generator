@@ -9,7 +9,7 @@ def update_readme(merge_sort_time):
     with open("README.md", "w") as f:
         f.write(
             '<h1 align="center"></h1>\n'
-            '<p align="center" style="font-weight: Bold;">Merge Sort</p>\n'
+            '<p align="center" style="font-weight: bold;">Merge Sort</p>\n'
             '<p align="center">\n'
             '  <img src="Preview/merge_sort_animation.gif" alt="Merge Sort Animation" width="600"/>\n'
             '  <p align="center" style="font-weight: normal;">Sorting completed in {:.10f} seconds</p>\n'
@@ -35,9 +35,10 @@ if __name__ == "__main__":
     print(f"Merge Sort completed in {merge_sort_time:.10f} seconds")
 
     # Create sorting animation for Merge Sort
-    animate_sorting(steps, output_file=os.path.join(output_dir, "merge_sort_animation.gif"))
+    animation_path = os.path.join(output_dir, "merge_sort_animation.gif")
+    animate_sorting(steps, output_file=animation_path)
 
     # Update README with sort time and animation
     update_readme(merge_sort_time)
 
-    print("Sorting animation created as 'merge_sort_animation.gif' and README.md updated.")
+    print(f"Sorting animation created as '{animation_path}' and README.md updated.")
