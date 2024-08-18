@@ -20,7 +20,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt  # Install dependencies if any
+        pip install -r requirement.txt  # Install dependencies if any
 
     - name: Install ImageMagick
       run: sudo apt-get update && sudo apt-get install -y imagemagick
@@ -33,7 +33,7 @@ jobs:
         ls -la python
 
     - name: Run Python script
-      working-directory: python  # Set the working directory where the script is located
+      working-directory: python  # Set the correct working directory to 'python'
       run: |
         python generate_and_solve.py  # Run the Python script
 
