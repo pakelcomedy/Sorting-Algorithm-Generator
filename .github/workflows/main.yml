@@ -1,7 +1,9 @@
 name: Run Python Script
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"  # Runs every 30 minutes
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   build:
@@ -38,7 +40,7 @@ jobs:
     - name: Commit and push changes
       run: |
         git add README.md
-        git commit -m 'Update README.md with new content' || echo "No changes to commit"
+        git commit -m 'Update Algorithm' || echo "No changes to commit"
         git push https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/pakelcomedy/Sorting-Puzzle-Generator.git HEAD:main
       env:
         PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
