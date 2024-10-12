@@ -2,6 +2,6 @@
 <p align="center" style="font-weight: Bold;">Merge Sort</p>
 <p align="center">
   <img src="Preview/merge_sort_animation.gif" alt="Merge Sort Animation" width="600"/>
-  <p align="center" style="font-weight: normal;">Sorting completed in 0.0001426270 seconds</p>
+  <p align="center" style="font-weight: normal;">Sorting completed in 0.0001429360 seconds</p>
 </p>
 <h1 align="center"></h1>
